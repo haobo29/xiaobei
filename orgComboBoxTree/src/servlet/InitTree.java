@@ -42,14 +42,13 @@ public class InitTree extends HttpServlet {
 		response.setContentType("text/html;charset=GBK");
 		response.setCharacterEncoding("GBK");
 		String upNode="41101";
-		String downNode="41401";
+		String downNode="4140100";
 		IOrgBiz orgBiz=new OrgBizImpl();
 		List<Map<String,String>> list=orgBiz.queryDownToUp(downNode, upNode);
 		JSONArray json=JSONArray.fromObject(list);
-		PrintWriter out=response.getWriter();
-		out.print(json);
-		out.flush();
-		out.close();
+		request.setAttribute("orgNoDef", downNode);
+		request.setAttribute("data", json);
+		request.getRequestDispatcher("tree.jsp").forward(request, response);
 	}
 
 }

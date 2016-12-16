@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-<title>延迟加载（异步取数据）</title>
+<title>延迟加载（一次取数据）</title>
 <script type="text/javascript" src="js/ligerui/jquery/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="js/ligerui/ligerUI/js/core/base.js"></script>
 <script type="text/javascript" src="js/ligerui/ligerUI/js/plugins/ligerComboBox.js"></script>
@@ -29,20 +29,13 @@ $(function(){
 	    resize:true,
 	    slide:true,
 	    tree: { 
-			/*url: "InitTree?down="+orgNoDef,*/
 			data:<%=request.getAttribute("data") %>,
 			textFieldName:"ORG_NAME",
 			idFieldName:"ORG_NO",
 			parentIDFieldName :"P_ORG_NO",
 		    checkbox: false,
 		    slide:true,
-		    /*isExpand:function(e){
-				if(e.data.ISEXPAND&&e.data.ISEXPAND=='1'){
-					return true;
-				}
-				return false;
-    		},*/
-		    
+		   
 		    isLeaf:function(node){
 		        if(node.IS_LEAF=="0"){
 		            if(!node.children){
@@ -52,22 +45,13 @@ $(function(){
 		        }
 		        return true;
 		    },
-		    /*onBeforeExpand:function(node){
-			    var treeMgr=orgComboBox.innerTree;
-			    if(node.data.children&&node.data.children.length==0){
-				    var orgNoNode=node.data.ORG_NO;
-				    treeMgr.loadData(node,"ExpTree?orgNo="+orgNoNode);
-				}
-			}*/
+		   
 		    delay: function(e)
             {
 		    	if(e.data.ISEXPAND=="1"){
 		    		return false;
 		    	}
-		    	if(e.data.IS_LEAF=="0"){
-		    		return { url: "ExpTree?orgNo="+e.data.ORG_NO}
-		    	}
-                return false;
+                return true;
             }
 	    }
 	});
