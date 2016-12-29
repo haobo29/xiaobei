@@ -47,7 +47,7 @@ public class InitTree extends HttpServlet {
 		List<Map<String,String>> list=orgBiz.queryDownToUp(downNode, upNode);
 		JSONArray json=JSONArray.fromObject(list);
 		request.setAttribute("orgNoDef", downNode);
-		request.setAttribute("data", json);
+		request.setAttribute("treeData", json);
 		request.getRequestDispatcher("tree.jsp").forward(request, response);
 	}
 

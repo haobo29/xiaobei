@@ -13,11 +13,10 @@
 </head>
 <body>
 <input type="text" id="org">
-<%String orgNoDef=(String)request.getAttribute("orgNoDef"); 
-%>
 <script type="text/javascript">
 $(function(){
-	var orgNoDef=<%=orgNoDef%>;
+	var orgNoDef=<%=(String)request.getAttribute("orgNoDef") %>;
+	var treeData=<%=request.getAttribute("treeData") %>;
 	var orgComboBox=$("#org").ligerComboBox({
 		width : 150,
 		selectBoxWidth: 200,
@@ -30,7 +29,7 @@ $(function(){
 	    slide:true,
 	    tree: { 
 			/*url: "InitTree?down="+orgNoDef,*/
-			data:<%=request.getAttribute("data") %>,
+			data:treeData,
 			textFieldName:"ORG_NAME",
 			idFieldName:"ORG_NO",
 			parentIDFieldName :"P_ORG_NO",
